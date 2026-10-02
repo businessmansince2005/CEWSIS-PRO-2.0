@@ -41,6 +41,12 @@ class LoginRequest(BaseModel):
     email: str
     password: str
 
+
+class SignupRequest(BaseModel):
+    name: str
+    email: str
+    password: str
+
 app = FastAPI(title="CEWSIS PRO 2.0 - Spectrum Intelligence API")
 
 # Enable CORS for frontend to talk to backend
@@ -95,6 +101,15 @@ def login(credentials: LoginRequest):
     token = secrets.token_urlsafe(32)
     active_sessions[token] = datetime.now(timezone.utc) + SESSION_TTL
     return {"authenticated": True, "token": token, "user": {"email": configured_email}}
+
+
+@app.post("/api/signup")
+def signup(credentials: SignupRequest):
+    if len(credentials.password) < 8:
+        return {"authenticated": False, "message": "Password must contain at least 8 characters."}
+    token = secrets.token_urlsafe(32)
+    active_sessions[token] = datetime.now(timezone.utc) + SESSION_TTL
+    return {"authenticated": True, "token": token, "user": {"email": credentials.email, "name": credentials.name}}
 
 
 @app.post("/api/logout")
