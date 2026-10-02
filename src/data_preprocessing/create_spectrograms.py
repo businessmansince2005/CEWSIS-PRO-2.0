@@ -9,7 +9,6 @@ Date: 2024
 """
 from pathlib import Path
 import numpy as np
-import matplotlib.pyplot as plt
 from typing import List, Tuple
 from scipy import signal
 from scipy.ndimage import zoom
