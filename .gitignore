@@ -29,6 +29,7 @@ ENV/
 data/raw/*.pkl
 data/raw/*.mat
 data/raw/*.h5
+data/*.pkl
 data/processed/*
 !data/processed/.gitkeep
 data/synthetic/*.pkl
