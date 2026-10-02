@@ -96,6 +96,14 @@ After login, the Overview, Live Lab, Spectrum, Models, and Experiments views are
 available. Sessions last eight hours in the current single-instance deployment.
 See [DEPLOYMENT.md](DEPLOYMENT.md) for public GitHub and Render instructions.
 
+### One-click hosted deployment
+
+[Deploy CEWSIS to Render](https://render.com/deploy?repo=https://github.com/businessmansince2005/CEWSIS-PRO-2.0)
+
+Render will create the FastAPI service from `render.yaml` and provide a public
+HTTPS URL. During setup, enter `CEWSIS_ADMIN_EMAIL` and `CEWSIS_ADMIN_PASSWORD`
+when Render asks for the private environment values.
+
 ### 2. Data Setup
 
 #### Option A: Use Synthetic Data (Quick Start)

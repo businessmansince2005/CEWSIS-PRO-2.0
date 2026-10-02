@@ -20,11 +20,12 @@ Do not commit `.env`, passwords, model secrets, or private datasets. The include
 
 ## Deploy with Render
 
-1. In Render, choose **New > Blueprint** and select the public GitHub repository.
-2. Render detects `render.yaml` and builds the service with the existing `Procfile` contract.
-3. Set `CEWSIS_ADMIN_EMAIL` and `CEWSIS_ADMIN_PASSWORD` as secret environment variables.
-4. Deploy and open the generated HTTPS URL.
-5. Open the URL, choose **Login**, and sign in with the values configured in Render.
+1. Open the one-click deploy link: https://render.com/deploy?repo=https://github.com/businessmansince2005/CEWSIS-PRO-2.0
+2. Sign in to Render and authorize access to the public repository.
+3. Render detects `render.yaml` and builds the service with the existing `Procfile` contract.
+4. Set `CEWSIS_ADMIN_EMAIL` and `CEWSIS_ADMIN_PASSWORD` as secret environment variables.
+5. Deploy and open the generated HTTPS URL.
+6. Open the URL, choose **Login**, and sign in with the values configured in Render.
 
 The dashboard itself is protected by the login route. The API currently uses in-memory sessions with an eight-hour lifetime, so a service restart signs users out. For a multi-user production deployment, replace `active_sessions` with a managed session store and add a persistent user database.
 
