@@ -29,6 +29,22 @@ Do not commit `.env`, passwords, model secrets, or private datasets. The include
 
 The dashboard itself is protected by the login route. The API currently uses in-memory sessions with an eight-hour lifetime, so a service restart signs users out. For a multi-user production deployment, replace `active_sessions` with a managed session store and add a persistent user database.
 
+## Custom domain
+
+Vercel has `cewsispro.com` attached to this project, but the registrar DNS must
+point the domain to Vercel before browsers can resolve it. Add this record at the
+domain registrar:
+
+```text
+Type: A
+Name: @
+Value: 76.76.21.21
+```
+
+Remove conflicting `A`, `AAAA`, or URL-forwarding records. After DNS propagation,
+the shareable address will be `https://cewsispro.com`. The name
+`cewsispro2.0.com` is not currently registered or attached to this Vercel project.
+
 ## Agent and chatbot access
 
 The public repository is machine-readable through its README, deployment manifest, Python API, and OpenAPI document. Once deployed, the API schema is available at `/openapi.json` and interactive documentation at `/docs`. Keep the public-data and synthetic-data disclaimer in place when extending the system.
