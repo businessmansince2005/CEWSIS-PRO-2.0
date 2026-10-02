@@ -105,8 +105,6 @@ def login(credentials: LoginRequest):
 
 @app.post("/api/signup")
 def signup(credentials: SignupRequest):
-    if len(credentials.password) < 8:
-        return {"authenticated": False, "message": "Password must contain at least 8 characters."}
     token = secrets.token_urlsafe(32)
     active_sessions[token] = datetime.now(timezone.utc) + SESSION_TTL
     return {"authenticated": True, "token": token, "user": {"email": credentials.email, "name": credentials.name}}
