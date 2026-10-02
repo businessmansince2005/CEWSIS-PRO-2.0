@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebooks
+*.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# Data (keep structure, ignore large files)
+data/raw/*.pkl
+data/raw/*.mat
+data/raw/*.h5
+data/processed/*
+!data/processed/.gitkeep
+data/synthetic/*.pkl
+!data/synthetic/.gitkeep
+
+# Model checkpoints
+checkpoints/*.pth
+checkpoints/*.h5
+checkpoints/*.ckpt
+!checkpoints/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.temp

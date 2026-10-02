@@ -1,0 +1,95 @@
+# Cognitive EW System Configuration
+# Edit these parameters to customize the system behavior
+
+# Data paths
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  synthetic_dir: data/synthetic
+  checkpoint_dir: checkpoints
+  
+  # Dataset loading
+  dataset_file: null  # Set to specific file name if needed, e.g., "RML2016.10a_dict.pkl"
+  max_samples: null   # Limit number of samples for testing (null = load all)
+
+# Preprocessing parameters
+preprocessing:
+  # Spectrogram generation
+  n_fft: 256          # FFT size (frequency resolution)
+  hop_length: 64      # Hop length between windows (time resolution)
+  window: 'hann'      # Window function type
+  
+  # Spectrogram normalization
+  normalize: true     # Normalize spectrograms to [0, 1]
+  target_shape: null  # Target (height, width) for resizing, null = auto-pad
+  
+  # Data splitting
+  train_ratio: 0.7    # Training set proportion
+  val_ratio: 0.15     # Validation set proportion
+  test_ratio: 0.15    # Test set proportion (auto-calculated)
+  random_seed: 42     # Random seed for reproducibility
+
+# Model architecture
+model:
+  # CNN Classifier
+  cnn:
+    in_channels: 1
+    num_classes: 7     # Number of modulation classes (adjust based on dataset)
+    dropout_rate: 0.5
+    hidden_dims: [512, 256]  # Fully connected layer dimensions
+  
+  # LSTM Autoencoder (for anomaly detection)
+  lstm_ae:
+    input_size: 2      # IQ = 2 channels (I and Q)
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+
+# Training parameters
+training:
+  batch_size: 32
+  learning_rate: 1e-3
+  num_epochs: 50
+  device: cpu          # 'cpu' or 'cuda' (auto-detected if cuda available)
+  
+  # Optimization
+  optimizer: 'adam'    # 'adam' or 'sgd'
+  weight_decay: 1e-4   # L2 regularization
+  scheduler: 'reduce_on_plateau'  # Learning rate scheduler
+  
+  # Early stopping
+  early_stopping: true
+  patience: 10         # Epochs to wait before early stopping
+  min_delta: 0.001     # Minimum improvement to reset patience
+  
+  # Checkpointing
+  save_best: true      # Save best model based on validation accuracy
+  save_frequency: 5    # Save checkpoint every N epochs
+
+# Evaluation
+evaluation:
+  metrics: ['accuracy', 'precision', 'recall', 'f1']
+  per_class_metrics: true
+  confusion_matrix: true
+  save_predictions: false
+
+# API (FastAPI backend)
+api:
+  host: '0.0.0.0'
+  port: 8000
+  reload: false        # Auto-reload on code changes (dev mode)
+  workers: 1
+
+# Logging
+logging:
+  level: 'INFO'        # DEBUG, INFO, WARNING, ERROR
+  log_dir: 'logs'
+  log_file: 'training.log'
+
+# Synthetic data generation (for testing)
+synthetic:
+  num_samples: 1000
+  modulations: ['BPSK', 'QPSK', '8PSK', '16QAM', '64QAM', 'GFSK', 'GMSK']
+  snr_levels: [-20, -10, 0, 10, 20]
+  iq_length: 1024     # Length of IQ samples
+  seed: 42

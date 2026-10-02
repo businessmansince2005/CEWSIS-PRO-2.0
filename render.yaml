@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cewsis-spectrum-intelligence
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python train_model.py --samples 1400
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/status
+    autoDeploy: true
+    envVars:
+      - key: CEWSIS_ADMIN_EMAIL
+        sync: false
+      - key: CEWSIS_ADMIN_PASSWORD
+        sync: false

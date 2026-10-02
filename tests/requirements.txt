@@ -1,0 +1,12 @@
+numpy
+scipy
+librosa
+matplotlib
+torch
+scikit-learn
+fastapi
+uvicorn
+pytest
+pydantic
+pyyaml
+soundfile
